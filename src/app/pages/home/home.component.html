@@ -1,0 +1,107 @@
+<div class="main container-fluid">
+    <div class="heading text-center container-fluid">
+        <h1>Get Your Scholarship Coupon</h1>
+    </div>
+    <div class="form_main container-fluid">
+        <form [formGroup]="scholarshipForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Student's Name</label>
+              <input type="text" formControlName="student_name" class="form-control" id="">
+              <span *ngIf="scholarshipForm.get('student_name').hasError('required') && scholarshipForm.get('student_name').touched" class="text-danger">Student's Name is a required field.</span>
+              <span *ngIf="scholarshipForm.get('student_name').hasError('pattern')" class="text-danger">Only Alphabet is required</span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Mother's Name</label>
+                <input type="text" formControlName="mother_name" class="form-control" >
+                <span *ngIf="scholarshipForm.get('mother_name').hasError('required') && scholarshipForm.get('mother_name').touched" class="text-danger">Mother's Name is a required field.</span>
+                <span *ngIf="scholarshipForm.get('mother_name').hasError('pattern')" class="text-danger">Only Alphabet is required</span>  
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Father's Name</label>
+              <input type="text" formControlName="father_name" class="form-control" >
+              <span *ngIf="scholarshipForm.get('father_name').hasError('required') && scholarshipForm.get('father_name').touched" class="text-danger">Father's Name is a required field.</span>
+              <span *ngIf="scholarshipForm.get('father_name').hasError('pattern')" class="text-danger">Only Alphabet is required</span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Mobile No</label>
+                <input type="number" formControlName="mobile_no" class="form-control">
+                <span *ngIf="scholarshipForm.get('mobile_no').hasError('required') && scholarshipForm.get('mobile_no').touched" class="text-danger">Mobile number is a required field.</span>
+              <span *ngIf="scholarshipForm.get('mobile_no').hasError('pattern')" class="text-danger">Only 10 digit number is required (No Special Characters)</span>
+              </div>
+            <div class="col-md-4">
+                <label class="form-label">Present Class</label>
+                <select class="form-select" formControlName="present_class" aria-label="Default select example">
+                    <option *ngFor="let c of class" [value]=c>{{c}}</option>
+                </select>
+                <span *ngIf="scholarshipForm.get('present_class').hasError('required') && scholarshipForm.get('present_class').touched" class="text-danger">Class is a required field.</span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Age</label>
+                <select class="form-select" formControlName="age" aria-label="Default select example" required>
+                    <option *ngFor="let a of age" [value]=a>{{a}}</option>
+                  </select>
+                  <span *ngIf="scholarshipForm.get('age').hasError('required') && scholarshipForm.get('age').touched" class="text-danger">Age is a required field.</span>  
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">City</label>
+              <input type="text" formControlName="city" class="form-control" id="inputCity" placeholder="City">
+              <span *ngIf="scholarshipForm.get('city').hasError('required') && scholarshipForm.get('city').touched" class="text-danger">City is a required field.</span>
+              <span *ngIf="scholarshipForm.get('city').hasError('pattern')" class="text-danger">Only Alphabet is required</span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">State</label>
+                <select id="inputState" formControlName="state" class="form-select">
+                <option *ngFor="let s of state" [value]=s>{{s}}</option>
+              </select>
+              <span *ngIf="scholarshipForm.get('state').hasError('required') && scholarshipForm.get('state').touched" class="text-danger">State is a required field.</span>  
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Zip Code</label>
+              <input type="text" formControlName="zipCode" class="form-control" id="inputZip">
+              <span *ngIf="scholarshipForm.get('zipCode').hasError('required') && scholarshipForm.get('zipCode').touched" class="text-danger">Zip Code is a required field.</span>  
+              <span *ngIf="scholarshipForm.get('zipCode').hasError('pattern')" class="text-danger">Only 6 digit is a required field.</span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Courses List</label>
+                <select (change)="onChange($event.target.value)" class="form-select" formControlName="course" aria-label="Default select example">
+                    <option *ngFor="let c of coursesList" [value]=c.course>{{c.course}}</option>
+                  </select>
+                  <span *ngIf="scholarshipForm.get('course').hasError('required') && scholarshipForm.get('course').touched" class="text-danger">Course is a required field.</span> 
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Course Price</label>
+                <select class="form-select" disabled>
+                    <option [value]="coursePrice">{{coursePrice}}</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Marks</label>
+                <select class="form-select" formControlName="marks" aria-label="Default select example">
+                    <option *ngFor="let m of marks" [value]=m>{{m}}</option>
+                  </select>
+                  <span *ngIf="scholarshipForm.get('marks').hasError('required') && scholarshipForm.get('marks').touched" class="text-danger">Marks is a required field.</span> 
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Report Card Upload</label>
+                <div class="input-group mb-3">
+                    <input type="file" formControlName="report_card" class="form-control" placeholder="Previous year Report Card" id="inputGroupFile02">
+                  </div>
+                  <span *ngIf="scholarshipForm.get('report_card').hasError('required') && scholarshipForm.get('report_card').touched" class="text-danger">Report Card is a required field.</span> 
+            </div>
+            
+            <div class="col-12">
+              <div class="form-check mb-3">
+                <input class="form-check-input" formControlName="check" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  Agree to Terms and Conditions
+                </label>
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button type="submit" class="btn btn-primary" [disabled]="!scholarshipForm.valid">Submit</button>
+            </div>
+          </form>
+    </div>
+</div>
+
+
