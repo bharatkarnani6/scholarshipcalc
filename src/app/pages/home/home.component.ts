@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
   scholarshipForm: FormGroup;
   submitted: false;
   coursePrice: any = '10000';
+  discount: string;
+  courseopt: string;
 
   class: any[] = ['5th', '6th', '7th', '8th', '9th', '10th', '10th Above'];
   age: any[] = ['1-4', '5-9', '10-14', '15-18', '18 Above'];
@@ -48,22 +50,26 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.firebasedatabse.displayStudentData().subscribe(e => {
-      e.map(data => {
-        console.log(data.payload.doc.data());
-      });
+    // this.firebasedatabse.displayStudentData().subscribe(e => {
+    //   e.map(data => {
+    //     console.log(data.payload.doc.data());
+    //   });
 
-    });
+    // });
   }
   // tslint:disable-next-line:typedef
   onSubmit() {
     this.scholarshipForm.value.course_price = this.coursePrice;
-    console.log(this.scholarshipForm.value);
-    this.firebasedatabse.createStudentData(this.scholarshipForm.value).then(() => {
-      this.scholarshipForm.reset();
-    }).catch(err => {
-      console.log(err);
-    });
+    this.getdiscounts();
+    this.scholarshipForm.value.discount = this.discount;
+    this.courseopt = this.scholarshipForm.value.course;
+
+    console.log(this.courseopt);
+    // this.firebasedatabse.createStudentData(this.scholarshipForm.value).then(() => {
+    //   this.scholarshipForm.reset();
+    // }).catch(err => {
+    //   console.log(err);
+    // });
   }
   // tslint:disable-next-line:typedef
   onChange(deviceValue: any) {
@@ -72,6 +78,30 @@ export class HomeComponent implements OnInit {
         this.coursePrice = e.price;
       }
     });
+  }
+  // tslint:disable-next-line:typedef
+  getdiscounts() {
+    if (this.scholarshipForm.value.marks === this.marks[0]) {
+      this.discount = '5%';
+    }
+    if (this.scholarshipForm.value.marks === this.marks[1]) {
+      this.discount = '8%';
+    }
+    if (this.scholarshipForm.value.marks === this.marks[2]) {
+      this.discount = '11%';
+    }
+    if (this.scholarshipForm.value.marks === this.marks[3]) {
+      this.discount = '14%';
+    }
+    if (this.scholarshipForm.value.marks === this.marks[4]) {
+      this.discount = '17%';
+    }
+    if (this.scholarshipForm.value.marks === this.marks[5]) {
+      this.discount = '20%';
+    }
+    if (this.scholarshipForm.value.marks === this.marks[6]) {
+      this.discount = '23%';
+    }
   }
 
 }
